@@ -12,7 +12,11 @@ public class AccountService {
         return List.of(
                 new Account("ACC001", "Savings", "12,450.00"),
                 new Account("ACC002", "Salary", "98,120.35"),
-                new Account("ACC003", "Business", "1,250,000.00")
+                new Account("ACC003", "Current", "1,250,000.00"),
+                new Account("ACC004", "Fixed Deposit", "500,000.00"),
+                new Account("ACC005", "Business", "250,000.00"),
+                new Account("ACC006", "Joint", "75,000.00"),
+                new Account("ACC007", "Loan", "200,000.00")
         );
     }
 

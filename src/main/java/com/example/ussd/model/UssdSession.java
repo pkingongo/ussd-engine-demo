@@ -2,6 +2,7 @@ package com.example.ussd.model;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UssdSession {
@@ -13,6 +14,11 @@ public class UssdSession {
     private Instant createdAt = Instant.now();
     private Instant updatedAt = Instant.now();
     private Map<String, Object> context = new HashMap<>();
+    private String dataType;
+    private List<Map<String, String>> fullData;
+    private int page = 1;
+    private int pageSize = 5;
+    private int totalItems;
 
     public UssdSession() {
     }
@@ -77,5 +83,45 @@ public class UssdSession {
 
     public void setContext(Map<String, Object> context) {
         this.context = context;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+
+    public List<Map<String, String>> getFullData() {
+        return fullData;
+    }
+
+    public void setFullData(List<Map<String, String>> fullData) {
+        this.fullData = fullData;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getTotalItems() {
+        return totalItems;
+    }
+
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
     }
 }

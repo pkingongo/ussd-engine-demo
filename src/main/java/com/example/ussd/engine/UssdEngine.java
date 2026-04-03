@@ -4,6 +4,8 @@ import com.example.ussd.handler.StateHandler;
 import com.example.ussd.model.*;
 import com.example.ussd.service.SessionService;
 import com.example.ussd.service.TransitionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,8 @@ public class UssdEngine {
      */
     private final SessionService sessionService;
 
+    private final ObjectMapper objectMapper;
+
     public UssdEngine(
             @Qualifier("stateHandlerMap") Map<String, StateHandler> handlers,
             TransitionService transitionService,
@@ -43,6 +47,8 @@ public class UssdEngine {
         this.handlers = handlers;
         this.transitionService = transitionService;
         this.sessionService = sessionService;
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule());
     }
 
     /**
@@ -72,6 +78,13 @@ public class UssdEngine {
             // Debug logs (useful during development)
             System.out.println("Available handlers: " + handlers.keySet());
             System.out.println("Current state: " + session.getCurrentState());
+
+            // Print session as JSON before processing state
+            try {
+                System.out.println("Session JSON: " + objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(session));
+            } catch (Exception e) {
+                System.out.println("Error serializing session: " + e.getMessage());
+            }
 
             // 2. Get handler for current state
             StateHandler handler = handlers.get(session.getCurrentState());

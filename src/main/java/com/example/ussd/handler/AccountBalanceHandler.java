@@ -17,11 +17,12 @@ public class AccountBalanceHandler implements StateHandler {
 
     @Override
     public String getState() {
-        return "ACCOUNT_BALANCE";
+        return "ACCOUNT_BAL";
     }
 
     @Override
     public UssdResult handle(UssdSession session, String input) {
+        System.out.println("Handling ACCOUNT_BAL for session: " + session.getSessionId() + ", input: " + input);
         String accountId = String.valueOf(session.getContext().get("selectedAccountId"));
         if (accountId == null || accountId.equals("null")) {
             return new UssdResult("END", "Session expired. Please dial again.", false);
